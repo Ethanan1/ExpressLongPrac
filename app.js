@@ -1,5 +1,12 @@
+const { application } = require('express');
 const express = require('express');
 const app = express();
+require('express-async-errors')
+
+app.use(express.json())
+// /static route able to access assets folder
+app.use("/static", express.static("assets")) //going into /static => cding into assets folder
+
 
 // For testing purposes, GET /
 app.get('/', (req, res) => {
@@ -11,7 +18,7 @@ app.post('/test-json', (req, res, next) => {
   // send the body as JSON with a Content-Type header of "application/json"
   // finishes the response, res.end()
   res.json(req.body);
-  next();
+  // next();
 });
 
 // For testing express-async-errors
