@@ -85,3 +85,23 @@ const deleteDog = (req, res) => {
 // ------------------------------  ROUTER ------------------------------
 
 // Your code here
+const express = require('express');
+
+// Create the router instance
+const router = express.Router()
+
+// Connect middleware to routes
+router.post('/', (validateDogInfo))
+router.put('/:dogId', (validateDogId, validateDogInfo))
+router.delete('/:dogId', (validateDogId))
+router.get('/:dogId', (validateDogId))
+
+
+// Route for handlers
+router.get('/', (getAllDogs))
+router.get('/:dogId', (getDogById))
+router.post('/', (createDog))
+router.put('/:dogId', (updateDog))
+router.delete('/:dogId', (deleteDog))
+
+module.exports = router;

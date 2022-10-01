@@ -11,7 +11,7 @@ app.use("/static", express.static("assets")) //going into /static => cding into 
 const logPath = (req, res, next) => {
   console.log("method: ", req.method)
   console.log("path: ", req.path)
-  
+
   res.on("finish", () => {
     console.log("status code: ", res.statusCode)
   })
@@ -21,6 +21,9 @@ const logPath = (req, res, next) => {
 
 app.use(logPath);
 
+// setup of router in app.js for getAllDogs
+const dogsRouter = require('./routes/dogs.js')
+app.use('/dogs', dogsRouter)
 
 // For testing purposes, GET /
 app.get('/', (req, res) => {
@@ -34,6 +37,9 @@ app.post('/test-json', (req, res, next) => {
   res.json(req.body);
   next();
 });
+
+// connect middleware to routes
+
 
 // For testing express-async-errors
 app.get('/test-error', async (req, res) => {
